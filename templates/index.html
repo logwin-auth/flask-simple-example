@@ -1,0 +1,29 @@
+{% extends "wrapper.html" %}
+{% block title %}
+    Flask Demo Notes
+{% endblock title %}
+{% block content %}
+    <h3>Notes:</h3>
+    {% if not notes %}
+        <p>There are currently no notes.</p>
+    {% else %}
+        <ul>
+            {% for note in notes %}
+                <li>
+                    <a href="{{ url_for("note_page", note_id=note.note_id) }}">{{ note.note_title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h3>Create Note</h3>
+    {% if empty_error %}<p class="error">Note title must not be empty.</p>{% endif %}
+    <form action="{{ url_for("homepage") }}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="exec_action" value="create_note" />
+        <input name="note_title"
+               value=""
+               placeholder="note title"
+               class="form-input" />
+        <button type="submit">Create Note</button>
+    </form>
+{% endblock content %}

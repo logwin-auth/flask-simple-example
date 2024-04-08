@@ -1,0 +1,25 @@
+{% extends "wrapper.html" %}
+{% block title %}
+    Flask Demo Notes: {{ note_title }}
+{% endblock title %}
+{% block content %}
+    <h3>Note:</h3>
+    {% if empty_error %}<p class="error">Note title must not be empty.</p>{% endif %}
+    <form action="" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <input name="note_title"
+               value="{{ note_title }}"
+               placeholder="note title"
+               class="form-input" />
+        <textarea name="note_text" class="form-input">{{ note_text }}</textarea>
+        <button type="submit">Update Note</button>
+    </form>
+    <form action=""
+          method="post"
+          onsubmit="return confirm('Do you really want to delete the note?');">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="delete_note" value="delete" />
+        <button type="submit">Delete Note</button>
+    </form>
+    <a href="{{ url_for("homepage") }}">Back to Home Page</a>
+{% endblock content %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" value="flask notes demo" />
+        <meta name="keywords" value="flask note demo fast" />
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+        <style>
+	  .body {
+	      width: 100%;
+	      margin: 0px;
+	  }
+	  div.wrapper {
+	      width: 100%;
+	      max-width: 600px;
+	      margin: 20px auto 0px auto;
+	  }
+	  input.form-input {
+	      width: 90%;
+	  }
+	  textarea.form-input {
+	      width: 90%;
+	      height: 300px;
+	  }
+	  p.error {
+	      color: red;
+	  }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,101 @@
+---
+repos:
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'v1.9.0'
+    hooks:
+      - id: mypy
+        args:
+          - --strict
+          - --no-install-types
+          - --strict-equality
+          - --strict-concatenate
+          - --no-implicit-reexport
+          - --warn-incomplete-stub
+          - --disallow-any-decorated
+          - --disallow-any-generics
+          - --disallow-subclassing-any
+          - --disallow-untyped-calls
+          - --disallow-untyped-defs
+          - --disallow-incomplete-defs
+        additional_dependencies:
+          - SQLAlchemy==2.0.19
+          - Flask==2.3.2
+          - alembic==1.13.1
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.11.0
+    hooks:
+      - id: yamlfmt
+        args: [-dstar, "**/*.{yaml,yml}", .yamlfmt]
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        args: [--format, parsable, --strict]
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.1.0
+    hooks:
+      - id: prettier
+        files: \.json$
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.6
+    hooks:
+      - id: codespell
+        args: ["-f", "-H"]
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: [--profile=black]
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: black
+        args: [--line-length, "79"]
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.10.0
+    hooks:
+      - id: shellcheck
+  - repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.34.1
+    hooks:
+      - id: djlint-reformat-jinja
+        files: "\\.html"
+        types_or: ['html']
+      - id: djlint-jinja
+        files: "\\.html"
+        types_or: ['html']
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        additional_dependencies:
+          - SQLAlchemy==2.0.19
+          - Flask==2.3.2
+          - alembic==1.13.1
+  - repo: https://github.com/pycqa/bandit
+    rev: 1.7.8
+    hooks:
+      - id: bandit
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.3.0
+    hooks:
+      - id: pydocstyle
+  - repo: https://github.com/pycqa/docformatter
+    rev: v1.7.5
+    hooks:
+      - id: docformatter
+        args:
+          - --black
+          - --wrap-descriptions=79
+          - --wrap-summaries=79
+          - --in-place
+          - --pre-summary-newline
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.8.0-1
+    hooks:
+      - id: shfmt
+        args: ["-w", "--indent=4"]
+  - repo: https://github.com/pre-commit/sync-pre-commit-deps
+    rev: v0.0.1
+    hooks:
+      - id: sync-pre-commit-deps
